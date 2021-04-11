@@ -5,7 +5,7 @@
  * @Github: @163.com
  * @Date: 2021-04-01 22:34:58
  * @LastEditors: Roy
- * @LastEditTime: 2021-04-07 11:08:06
+ * @LastEditTime: 2021-04-11 00:14:33
  * @Deprecated: 否
  * @FilePath: /datav-report/src/main.js
  */
@@ -34,6 +34,10 @@ import ECharts from 'vue-echarts'
 import lang from 'element-plus/lib/locale/lang/zh-cn'
 import 'dayjs/locale/zh-cn'
 import locale from 'element-plus/lib/locale'
+import 'echarts-liquidfill'
+import 'echarts-wordcloud'
+// import VCharts from 'v-charts'
+// import 'v-charts/lib/style.css'
 locale.use(lang)
 
 const app = createApp(App)
@@ -52,4 +56,5 @@ app.use(router)
   .use(ElTable)
   .use(ElTableColumn)
   .use(ElPagination)
+  // .use(VCharts)
   .mount('#app')

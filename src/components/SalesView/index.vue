@@ -5,7 +5,7 @@
  * @Github: @163.com
  * @Date: 2021-04-01 22:54:13
  * @LastEditors: Roy
- * @LastEditTime: 2021-04-07 10:57:30
+ * @LastEditTime: 2021-04-11 23:26:00
  * @Deprecated: 否
  * @FilePath: /datav-report/src/components/SalesView/index.vue
 -->
@@ -45,7 +45,7 @@
               end-placeholder="结束日期"
               :shortcuts="shortcuts"
               size="small"
-              c
+
             >
             </el-date-picker>
           </div>
@@ -70,9 +70,15 @@
   </div>
 </template>
 <script>
-import { ref, reactive } from 'vue'
+import { ref, reactive, inject, computed } from 'vue'
+import { wrapperArray } from '../../utils/commonData'
 export default {
   setup () {
+    const orderFullYear = ref(wrapperArray(inject('mapScatters'), 'orderFullYear'))
+    const orderFullYearAxis = ref(wrapperArray(inject('mapScatters'), 'orderFullYearAxis'))
+    const userFullYear = ref(wrapperArray(inject('mapScatters'), 'userFullYear'))
+    const userFullYearAxis = ref(wrapperArray(inject('mapScatters'), 'userFullYearAxis'))
+
     const selectActive = ref('1')
     const radioSelect = ref('今日')
     const datePickerValue = ref('')
@@ -117,20 +123,7 @@ export default {
       },
       xAxis: {
         type: 'category',
-        data: [
-          '1月',
-          '2月',
-          '3月',
-          '4月',
-          '5月',
-          '6月',
-          '7月',
-          '8月',
-          '9月',
-          '10月',
-          '11月',
-          '12月'
-        ],
+        data: orderFullYearAxis,
         axisTick: {
           alignWithLabel: true, // 柱状图在x轴点得中间
           lineStyle: {
@@ -164,7 +157,7 @@ export default {
         {
           type: 'bar',
           barWidth: '35%',
-          data: [200, 250, 300, 350, 300, 200, 250, 300, 350, 300, 200, 250]
+          data: orderFullYear
         }
       ],
       color: ['#3398DB'],
@@ -175,17 +168,31 @@ export default {
         bottom: 50
       }
     })
-    const rankData = ref([
-      { no: 1, money: '322,234', name: '麦当劳' },
-      { no: 2, money: '322,234', name: '麦当劳' },
-      { no: 3, money: '322,234', name: '麦当劳' },
-      { no: 4, money: '322,234', name: '麦当劳' },
-      { no: 5, money: '322,234', name: '麦当劳' },
-      { no: 6, money: '322,234', name: '麦当劳' },
-      { no: 7, money: '322,234', name: '麦当劳' }
-    ])
+    const rankData = computed(() => {
+      return selectActive.value === '1' ? wrapperArray(inject('mapScatters'), 'orderRank') : wrapperArray(inject('mapScatters'), 'userRank')
+    })
+
+    const render = (title, axis, data) => {
+      chartOption.title.text = title
+      chartOption.xAxis.data = axis
+      chartOption.series[0].data = data
+    }
+    // ref([
+    //   { no: 1, money: '322,234', name: '麦当劳' },
+    //   { no: 2, money: '322,234', name: '麦当劳' },
+    //   { no: 3, money: '322,234', name: '麦当劳' },
+    //   { no: 4, money: '322,234', name: '麦当劳' },
+    //   { no: 5, money: '322,234', name: '麦当劳' },
+    //   { no: 6, money: '322,234', name: '麦当劳' },
+    //   { no: 7, money: '322,234', name: '麦当劳' }
+    // ])
     const handleSelect = (key, keyPath) => {
       selectActive.value = key
+      if (key === '1') {
+        render('年度销售额', orderFullYearAxis, orderFullYear)
+      } else {
+        render('年度用户访问量', userFullYearAxis, userFullYear)
+      }
     }
 
     return {

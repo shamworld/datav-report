@@ -5,7 +5,7 @@
  * @Github: @163.com
  * @Date: 2021-04-01 23:05:44
  * @LastEditors: Roy
- * @LastEditTime: 2021-04-04 17:20:41
+ * @LastEditTime: 2021-04-11 22:31:00
  * @Deprecated: 否
  * @FilePath: /datav-report/src/components/CommonCard/index.vue
 -->
@@ -26,7 +26,7 @@
 export default {
   props: {
     title: String,
-    value: String
+    value: [String, Number]
   }
 }
 </script>
@@ -54,6 +54,7 @@ export default {
 }
 </style>
 <style lang="scss">
+
 .emphasis {
   margin-left: 5px;
   color: #333;
