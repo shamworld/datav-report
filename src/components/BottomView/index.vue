@@ -5,7 +5,7 @@
  * @Github: @163.com
  * @Date: 2021-04-01 22:54:13
  * @LastEditors: Roy
- * @LastEditTime: 2021-04-11 21:49:19
+ * @LastEditTime: 2021-04-12 14:31:00
  * @Deprecated: 否
  * @FilePath: /datav-report/src/components/BottomView/index.vue
 -->
@@ -38,7 +38,7 @@
             </el-table>
             <el-pagination
               layout="prev, pager, next"
-              :total="100"
+              :total="4"
               :page-size="4"
               background
               @current-change="onPageChange"
@@ -105,10 +105,10 @@ export default {
     })
     const searchNumberOption = reactive({})
     const tableData = ref([
-      { id: 1, rank: 1, keyword: '北京', count: 100, users: 90, range: '90%' },
-      { id: 2, rank: 2, keyword: '北京', count: 100, users: 90, range: '90%' },
-      { id: 3, rank: 3, keyword: '北京', count: 100, users: 90, range: '90%' },
-      { id: 4, rank: 4, keyword: '北京', count: 100, users: 90, range: '90%' }
+      { id: 1, rank: 1, keyword: '北京', count: 89, users: 90, range: '67%' },
+      { id: 2, rank: 2, keyword: '上海', count: 64, users: 56, range: '55%' },
+      { id: 3, rank: 3, keyword: '深圳', count: 57, users: 43, range: '46%' },
+      { id: 4, rank: 4, keyword: '武汉', count: 35, users: 23, range: '24%' }
     ])
     const radioSelect = ref('品类')
     const categoryOption = reactive({
